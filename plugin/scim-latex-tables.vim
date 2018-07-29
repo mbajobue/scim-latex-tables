@@ -6,6 +6,7 @@
 if exists("g:loaded_slt")
   finish
 endif
+
 let g:loaded_slt = 1
 
 let s:save_cpo = &cpo
