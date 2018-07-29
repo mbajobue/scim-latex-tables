@@ -6,7 +6,7 @@ I wrote this vim plugin for personal use, since writing Latex tables is a huge p
 
 ## Usage
 
-[sc-im](https://github.com/andmarti1424/sc-im) will open up in your terminal emulator running Vim whenever you type `\begin{table}`. Write your table in the spreadsheet editor. Save the file and exit [sc-im](https://github.com/andmarti1424/sc-im) just like you would normally do in Vim, `:wq`. Then a full tex-formatted table will appear in your document. You just have to fill in the caption, label and tabular gaps.
+Type 'newTable' or 'importTable' (if you want to import an existing 'csv' file as a table) where you want your table to be. [sc-im](https://github.com/andmarti1424/sc-im) will open up in your terminal emulator running Vim. Create/edit your table, save the file and exit [sc-im](https://github.com/andmarti1424/sc-im) just like you would normally do in Vim, `:wq`. Then a full tex-formatted table will appear in your document. You just have to fill in the caption, label and tabular gaps.
 
 ## Dependencies
 
