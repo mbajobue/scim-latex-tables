@@ -44,6 +44,9 @@ iabbrev iii <esc>:call Import_table()<CR>
 
 function! Csv_to_tex()
         exe '!sc-im .table.csv'
+        exe '!sed -i  "s/,$//g" .table.csv'
+        exe '!sed -i  "/^,$/d" .table.csv'
+        exe '!sed -i  "/,,$/d" .table.csv'
         exe '!sed -i -- "s/,/ \&      /g" .table.csv'
         exe '!sed -i "s|$|    \\\|" .table.csv'
         exe '!sed -i "s|$|\\\|" .table.csv'
