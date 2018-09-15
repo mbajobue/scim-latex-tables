@@ -39,8 +39,6 @@ iabbrev importTable \begin{table}[htbp]<CR>
         \?tabular}{}<CR>2f}i
 
 
-iabbrev iii <esc>:call Import_table()<CR>
-
 
 function! Csv_to_tex()
         exe '!sc-im .table.csv'
