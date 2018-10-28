@@ -1,7 +1,10 @@
 " scim-latex-tables is a Vim pluggin that generates latex tables using sc-im, a spreadsheet program for the terminal emulator. 
-" Last Change:  29/07/2018
+" Last Change:  28/10/2018
 " Maintainer:   Manuel Bajo Buenestado <lolobajo@gmail.com>
 " License:      MIT LICENSE
+
+
+
 
 if exists("g:loaded_slt")
   finish
@@ -13,32 +16,6 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 
-iabbrev newTable \begin{table}[htbp]<CR>
-        \<tab>\begin{center}<CR>
-        \<tab><tab>\begin{tabular}{}<CR>
-        \<CR><CR><tab><tab>\end{tabular}<CR>
-        \<tab><tab>\caption{}<CR>
-        \<tab><tab>\label{}<CR>
-        \<tab>\end{center}<CR>
-	\\end{table}<esc>6k
-	\:! touch .table.csv<CR>
-        \:call Csv_to_tex()<CR>
-        \?tabular}{}<CR>2f}i
-
-
-iabbrev importTable \begin{table}[htbp]<CR>
-        \<tab>\begin{center}<CR>
-        \<tab><tab>\begin{tabular}{}<CR>
-        \<CR><CR><tab><tab>\end{tabular}<CR>
-        \<tab><tab>\caption{}<CR>
-        \<tab><tab>\label{}<CR>
-        \<tab>\end{center}<CR>
-        \\end{table}<esc>6k
-        \:call Import_table()<CR>
-        \:call Csv_to_tex()<CR>
-        \?tabular}{}<CR>2f}i
-
-
 
 function! Csv_to_tex()
         exe '!sc-im .table.csv'
@@ -48,15 +25,50 @@ function! Csv_to_tex()
         exe '!sed -i -- "s/,/ \&      /g" .table.csv'
         exe '!sed -i "s|$|    \\\|" .table.csv'
         exe '!sed -i "s|$|\\\|" .table.csv'
+	exe '!sed -i "1ihline" .table.csv'
+	exe '!sed -i "3ihline hline" .table.csv'
+	exe '!sed -i "\$ahline" .table.csv'
+	exe '!sed -i -e "s/hline/\\\hline/g" .table.csv'
         exe '!sed -i "s/^/			/" .table.csv'
         exe 'r .table.csv'
         exe '!rm .table.csv'
 endfunction
 
 
+
 function! Import_table()
 	exe '! touch .table.csv'
 	exe '!read -p "CSV file path: " path && cp $path .table.csv'
 endfunction
+
+
+
+iabbrev newTable \begin{table}[htbp]<CR>
+        \<tab>\begin{center}<CR>
+        \<tab><tab>\begin{tabular}{}<CR>
+        \<CR><CR>\end{tabular}<CR>
+        \%\caption{}<CR>
+        \%\label{}<CR>
+        \\end{center}<CR>
+	\\end{table}<esc>6k
+	\:! touch .table.csv<CR>
+        \:call Csv_to_tex()<CR>
+        \?tabular}{}<CR>2f}i
+
+
+
+iabbrev importTable \begin{table}[htbp]<CR>
+        \<tab>\begin{center}<CR>
+        \<tab><tab>\begin{tabular}{}<CR>
+        \<CR><CR>\end{tabular}<CR>
+        \%\caption{}<CR>
+        \%\label{}<CR>
+        \\end{center}<CR>
+        \\end{table}<esc>6k
+        \:call Import_table()<CR>
+        \:call Csv_to_tex()<CR>
+        \?tabular}{}<CR>2f}i
+
+
 
 let &cpo = s:save_cpo
