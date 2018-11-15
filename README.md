@@ -11,7 +11,7 @@ Type 'newTable' or 'importTable' (if you want to import an existing 'csv' file a
 
 ## Demo
 
-![Demo](http://mural.uv.es/mababue/slt.gif)
+![Demo](http://mural.uv.es/mababue/slt2.gif)
 
 ## Dependencies
 
